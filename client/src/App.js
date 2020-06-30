@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
-import AceEditor from 'react-ace'
-import 'ace-builds/src-noconflict/mode-c_cpp'
-import 'ace-builds/src-noconflict/theme-github'
+import React, { useState, useEffect } from 'react';
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-c_cpp';
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/theme-github';
 import "ace-builds/src-noconflict/mode-text";
+import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/theme-monokai';
+
+import { FaSun, FaRegMoon, FaPlusCircle, FaMinusCircle, FaPlay } from "react-icons/fa"
 import axios from "axios";
 
 const App = () => {
   const [code, setcode] = useState("")
+  const [Theme, setTheme] = useState(true)
   const [input, setinput] = useState("")
   const [lang, setlang] = useState("c_cpp")
-  const [output, setoutput] = useState("\n1. Choose Your language, \n2. Code also give inputs if required. \n3. click on run to generate output")
+  const [fontSize, setfontSize] = useState(14)
+  const [output, setoutput] = useState("\n1. Choose language & code your logic, \n2. Give inputs if required. \n3. click on run to generate output")
 
-  let compile = () => {
+  useEffect(() => {
+    //getting last used config and code
+    setcode(localStorage.getItem("code"))
+    if (localStorage.getItem("theme") == "true")
+      setTheme(true)
+    else if (localStorage.getItem("theme") == "false") {
+      document.body.classList.toggle('dark')
+      setTheme(false)
+    }
+  }, [])
+
+  const compile = () => {
     axios.post('/api/compile-run', { code, lang, input }).then(resp => {
       setoutput(resp.data.stdout)
       console.log(resp.data)
@@ -23,24 +41,62 @@ const App = () => {
       console.log(err)
     })
   }
+
+  const toggletheme = () => {
+    //to toggle btw dark and light theme
+    document.body.classList.toggle('dark')
+    localStorage.setItem("theme", !Theme)
+    setTheme(!Theme)
+  }
+
   return (
-    <center>
+    <div>
+      <section id="header">
+        <span id="title">ACE {"<IDE />"}</span>
+
+        <select onChange={e => setlang(e.target.value)}>
+          <option value="c_cpp">C/C++</option>
+          <option value="python">Python</option>
+        </select>
+
+        <div>
+          < FaMinusCircle className="fontSwitch" onClick={() => {
+            if (fontSize > 10)
+              setfontSize(fontSize - 1)
+          }} />
+          <b>Font Size: {fontSize}</b>
+          <FaPlusCircle className="fontSwitch" onClick={() => {
+            if (fontSize <= 24)
+              setfontSize(fontSize + 1)
+          }} />
+        </div>
+
+        {Theme ? <FaRegMoon className="icon" onClick={toggletheme} /> : <FaSun className="icon" id="sun" onClick={toggletheme} />}
+
+      </section>
+
       <div className="editor">
-        <h3>ACE_IDE</h3>
         <AceEditor
           mode={lang}
-          theme="github"
+          theme={Theme ? "github" : "monokai"}
           name="Editor"
           width="90vw"
           height="50vh"
+          value={code}
+          fontSize={fontSize}
           showPrintMargin={false}
-          onChange={e => setcode(e)}
+          onChange={e => {
+            localStorage.setItem("code", e)
+            setcode(e)
+          }}
         />
-        <button onClick={() => {
+        <button className="run" onClick={() => {
           compile()
         }}>
-          Run
+          Run{"\t"}
+          <FaPlay />
         </button>
+
       </div>
       <div className="sideLayout">
         <div>
@@ -48,8 +104,11 @@ const App = () => {
           <AceEditor
             name="input"
             mode="text"
-            theme="github"
+            theme={Theme ? "github" : "monokai"}
             height="30vh"
+            showGutter={false}
+            fontSize={fontSize}
+            showPrintMargin={false}
             onChange={e => setinput(e)}
           />
         </div>
@@ -59,13 +118,16 @@ const App = () => {
             name="output"
             value={output}
             mode="text"
-            theme="github"
+            showGutter={false}
+            theme={Theme ? "github" : "monokai"}
             height="30vh"
+            fontSize={fontSize}
+            showPrintMargin={false}
             readOnly={true}
           />
         </div>
       </div>
-    </center>
+    </div>
   )
 }
 export default App;

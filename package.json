@@ -5,7 +5,10 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "node index.js & cd client && npm start"
+		"dev": "node index.js & cd client && npm start",
+		"postinstall": "cd client && npm install && npm run build",
+		"start": "node index.js",
+		"heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
 	},
 	"author": "Maneesh K",
 	"license": "ISC",
