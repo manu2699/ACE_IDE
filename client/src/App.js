@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-c_cpp';
 import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/mode-java'
 import 'ace-builds/src-noconflict/theme-github';
 import "ace-builds/src-noconflict/mode-text";
 import 'ace-builds/src-noconflict/theme-github';
@@ -56,6 +57,7 @@ const App = () => {
 
         <select onChange={e => setlang(e.target.value)}>
           <option value="c_cpp">C/C++</option>
+          {/* <option value="java">JAVA</option> */}
           <option value="python">Python</option>
         </select>
 
