@@ -1,0 +1,16 @@
+{
+	"name": "simple-ide",
+	"version": "1.0.0",
+	"description": "A simple Online IDE to run your CPP and Python Files.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "node index.js & cd client && npm start"
+	},
+	"author": "Maneesh K",
+	"license": "ISC",
+	"dependencies": {
+		"compile-run": "^2.3.2",
+		"express": "^4.17.1"
+	}
+}
