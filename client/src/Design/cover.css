@@ -116,6 +116,14 @@
 	.oval {
 		margin: 30px 20px;
 	}
+	.oval h4 {
+		font-size: 1em;
+	}
+
+	.col h2 {
+		font-size: 2em;
+		font-weight: 200;
+	}
 }
 
 .circle {
