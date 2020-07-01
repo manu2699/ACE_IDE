@@ -11,12 +11,6 @@
 	font-weight: 600;
 	margin: 40px 10px;
 }
-
-/* @media (max-width: 840px) {
-	#topics {
-		font-size: 1.5em;
-	}
-} */
 .card {
 	width: 170px;
 	height: 170px;
@@ -27,6 +21,16 @@
 	align-items: center;
 	justify-content: center;
 	font-size: 1.5em;
+}
+@media (max-width: 840px) {
+	.card {
+		width: 130px;
+		height: 130px;
+		font-size: 1.1em;
+	}
+	#topics {
+		font-size: 1.5em;
+	}
 }
 
 .card0 {

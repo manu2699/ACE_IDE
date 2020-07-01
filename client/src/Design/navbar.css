@@ -28,6 +28,10 @@
 	position: relative;
 }
 
+.navbar h2 {
+	font-size: 1.2em;
+}
+
 #currUser,
 span {
 	color: #1b74fa;
@@ -168,7 +172,8 @@ span {
 	background-color: #022c6d;
 	color: #fff;
 	flex-direction: column;
-	align-items: center;
+	text-align: left;
+	padding: 0px 20px;
 	position: fixed;
 	top: 8vh;
 	left: 0;

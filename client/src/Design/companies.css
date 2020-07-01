@@ -1,6 +1,7 @@
 .companies {
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 	align-content: center;
 	justify-content: space-evenly;
 	height: 15vh;
@@ -9,10 +10,11 @@
 }
 .companies .upStream {
 	/* position: absolute; */
-	width: 10%;
+	width: 10vw;
 	margin-top: 0rem;
 	animation: upAnim 2s ease-out 2s infinite;
 }
+
 @keyframes upAnim {
 	0% {
 		margin-top: 0rem;
@@ -27,7 +29,7 @@
 
 .companies .downStream {
 	/* position: absolute; */
-	width: 10%;
+	width: 10vw;
 	margin-top: 1.5rem;
 	animation: downAnim 2s ease-out 2s infinite;
 }
@@ -40,5 +42,23 @@
 	}
 	100% {
 		margin-top: 0.5rem;
+	}
+}
+
+@media (max-width: 840px) {
+	.companies {
+		height: 25vh;
+	}
+	.companies .upStream {
+		width: 30vw;
+
+		margin-top: 0rem;
+		animation: upAnim 2s ease-out 2s infinite;
+	}
+	.companies .downStream {
+		/* position: absolute; */
+		width: 30vw;
+		margin-top: 1rem;
+		animation: downAnim 2s ease-out 2s infinite;
 	}
 }
