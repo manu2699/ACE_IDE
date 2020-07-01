@@ -1,0 +1,44 @@
+.companies {
+	width: 100%;
+	display: flex;
+	align-content: center;
+	justify-content: space-evenly;
+	height: 15vh;
+	/* background-color: #1b74fa54; */
+	position: relative;
+}
+.companies .upStream {
+	/* position: absolute; */
+	width: 10%;
+	margin-top: 0rem;
+	animation: upAnim 2s ease-out 2s infinite;
+}
+@keyframes upAnim {
+	0% {
+		margin-top: 0rem;
+	}
+	50% {
+		margin-top: 0.5rem;
+	}
+	100% {
+		margin-top: 0rem;
+	}
+}
+
+.companies .downStream {
+	/* position: absolute; */
+	width: 10%;
+	margin-top: 1.5rem;
+	animation: downAnim 2s ease-out 2s infinite;
+}
+@keyframes downAnim {
+	0% {
+		margin-top: 0.5rem;
+	}
+	50% {
+		margin-top: 0rem;
+	}
+	100% {
+		margin-top: 0.5rem;
+	}
+}
